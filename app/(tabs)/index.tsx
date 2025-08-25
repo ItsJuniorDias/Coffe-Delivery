@@ -1,9 +1,9 @@
 import { Colors } from "@/constants/Colors";
 import { Image } from "expo-image";
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import Constants from "expo-constants";
 
-import { Text } from "@/components";
+import { Text, Input } from "@/components";
 
 import avatar from "../../assets/images/avatar.png";
 
@@ -22,12 +22,19 @@ export default function HomeScreen() {
             title="Brew"
             color={Colors.light.iconFocused}
             size="48"
-            style={{ marginTop: -24 }}
+            style={{ marginTop: -18 }}
           />
         </View>
 
-        <Image source={avatar} style={styles.image} />
+        <Pressable
+          onPress={() => {}}
+          style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+        >
+          <Image source={avatar} style={styles.image} />
+        </Pressable>
       </View>
+
+      <Input />
     </View>
   );
 }
