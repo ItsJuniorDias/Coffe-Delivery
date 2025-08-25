@@ -3,18 +3,17 @@ import { Image } from "expo-image";
 import styled from "styled-components/native";
 
 export const Container = styled.TouchableOpacity`
-  width: 135px;
-  height: 230px;
+  width: 45%;
   background-color: ${Colors.light.backgroundCard};
   border-radius: 16px;
   padding: 12px;
   gap: 8px;
-  margin-right: 16px;
+  margin-right: 24px;
   margin-bottom: 16px;
 `;
 
 export const ImageCustom = styled(Image)`
-  width: 111px;
+  width: 100%;
   height: 111px;
   border-radius: 8px;
 `;
@@ -24,7 +23,6 @@ export const ViewButton = styled.View`
   height: 40px;
   background-color: ${Colors.light.bakgroundButtonCard};
   border-radius: 16px;
-
   justify-content: center;
   flex-direction: row;
   justify-content: space-between;
