@@ -1,13 +1,36 @@
 import { Colors } from "@/constants/Colors";
 import { Image } from "expo-image";
-import { Pressable, StyleSheet, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, View } from "react-native";
 import Constants from "expo-constants";
 
-import { Text, Input } from "@/components";
+import { Text, Input, Card } from "@/components";
 
 import avatar from "../../assets/images/avatar.png";
 
+const DATA = [
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    title: "First Item",
+  },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    title: "Second Item",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Third Item",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d73",
+    title: "Fourth Item",
+  },
+];
+
 export default function HomeScreen() {
+  const renderItem = (props) => {
+    return <Card />;
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -35,6 +58,17 @@ export default function HomeScreen() {
       </View>
 
       <Input />
+
+      <FlatList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        numColumns={2}
+        contentContainerStyle={{
+          alignItems: "center",
+          paddingTop: 24,
+        }}
+      />
     </View>
   );
 }
