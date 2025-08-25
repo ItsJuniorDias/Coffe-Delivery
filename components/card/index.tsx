@@ -1,6 +1,15 @@
 import { Colors } from "@/constants/Colors";
 import { Text } from "../";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+} from "react-native-reanimated";
+import {
+  PanGestureHandler,
+  PanGestureHandlerGestureEvent,
+} from "react-native-gesture-handler";
 
 import { Container, ImageCustom, ViewButton, PressableCustom } from "./styles";
 

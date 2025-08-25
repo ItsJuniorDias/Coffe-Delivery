@@ -97,6 +97,7 @@ export default function HomeScreen() {
           paddingLeft: 16,
           paddingBottom: 80,
         }}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

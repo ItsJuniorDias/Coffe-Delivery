@@ -3,7 +3,7 @@ import React from "react";
 import { Platform } from "react-native";
 
 import { HapticTab } from "@/components/HapticTab";
-import { IconSymbol } from "@/components/ui/IconSymbol";
+
 import TabBarBackground from "@/components/ui/TabBarBackground";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
@@ -20,6 +20,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors.light.iconFocused,
         headerShown: false,
         tabBarButton: HapticTab,
+
         tabBarBackground: () => (
           <TabBarBackground
             styles={{
@@ -41,6 +42,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
+
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="home" size={32} color={color} />
           ),
@@ -49,6 +51,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="shop"
         options={{
+          tabBarBadge: 3,
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="shopping-cart" size={32} color={color} />
           ),
