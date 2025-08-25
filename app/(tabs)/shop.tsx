@@ -2,7 +2,7 @@ import { Colors } from "@/constants/Colors";
 import { Image } from "expo-image";
 import { Platform, StyleSheet, View } from "react-native";
 
-export default function TabTwoScreen() {
+export default function ShopScreen() {
   return <View style={styles.container}></View>;
 }
 
