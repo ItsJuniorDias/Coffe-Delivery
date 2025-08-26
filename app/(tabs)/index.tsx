@@ -11,7 +11,7 @@ import { CardComponentProps } from "@/components/card";
 const DATA = [
   {
     id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "Cinnamon & Cocoa",
+    title: "Cinnamon & Cocoa ",
     image:
       "https://plus.unsplash.com/premium_photo-1674327105074-46dd8319164b?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29mZmV8ZW58MHx8MHx8fDA%3D",
     value: "$5.99",

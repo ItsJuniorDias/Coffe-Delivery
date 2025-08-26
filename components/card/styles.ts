@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 
 export const Container = styled.TouchableOpacity`
   width: 45%;
+  /* height: 230px; */
   background-color: ${Colors.light.backgroundCard};
   border-radius: 16px;
   padding: 12px;
