@@ -11,9 +11,10 @@ type DataStore = {
   data: CoffeProps;
   fetch: (item: CoffeProps) => void;
   removeItem: (id: number) => void;
+  total: () => number;
 };
 
-export const useUserStore = create<DataStore>((set) => ({
+export const useCoffeStore = create<DataStore>((set, get) => ({
   data: [],
   fetch: (item: CoffeProps) =>
     set((state) => ({ data: [...state.data, item] })),
@@ -21,4 +22,10 @@ export const useUserStore = create<DataStore>((set) => ({
     set((state) => ({
       data: state.data.filter((item) => item.id !== id),
     })),
+  total: () =>
+    Number(
+      get()
+        .data.reduce((acc, item) => acc + item.value, 0)
+        .toFixed(2)
+    ),
 }));

@@ -6,13 +6,12 @@ import { HapticTab } from "@/components/HapticTab";
 
 import TabBarBackground from "@/components/ui/TabBarBackground";
 import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
 
-import Octicons from "@expo/vector-icons/Octicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useCoffeStore } from "@/store";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const { data } = useCoffeStore();
 
   return (
     <Tabs
@@ -20,7 +19,6 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors.light.iconFocused,
         headerShown: false,
         tabBarButton: HapticTab,
-
         tabBarBackground: () => (
           <TabBarBackground
             styles={{
@@ -31,7 +29,6 @@ export default function TabLayout() {
         tabBarShowLabel: false,
         tabBarStyle: Platform.select({
           ios: {
-            // Use a transparent background on iOS to show the blur effect
             position: "absolute",
           },
           default: {},
@@ -42,7 +39,6 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
-
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="home" size={32} color={color} />
           ),
@@ -51,7 +47,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="shop"
         options={{
-          tabBarBadge: 3,
+          tabBarBadge: data.length,
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="shopping-cart" size={32} color={color} />
           ),

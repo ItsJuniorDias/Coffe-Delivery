@@ -7,7 +7,7 @@ import { Text, Input, Card } from "@/components";
 
 import avatar from "../../assets/images/avatar.png";
 import { CardComponentProps } from "@/components/card";
-import { useUserStore } from "@/store";
+import { useCoffeStore } from "@/store";
 
 const DATA = [
   {
@@ -56,7 +56,7 @@ const DATA = [
 ];
 
 export default function HomeScreen() {
-  const { fetch } = useUserStore();
+  const { fetch } = useCoffeStore();
 
   const renderItem = ({ id, title, image, value }: CardComponentProps) => {
     return (

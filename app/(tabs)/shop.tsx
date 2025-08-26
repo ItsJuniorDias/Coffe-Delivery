@@ -24,7 +24,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { useUserStore } from "@/store";
+import { useCoffeStore } from "@/store";
 
 const { width } = Dimensions.get("window");
 const TRANSLATE_X_THRESHOLD = -width * 0.3;
@@ -83,7 +83,7 @@ function SwipeableItem({ item, onDelete }: SwipeableProps) {
 }
 
 export default function ShopScreen() {
-  const { data, removeItem } = useUserStore();
+  const { data, removeItem, total } = useCoffeStore();
 
   console.log(data, "DATA");
 
@@ -124,8 +124,8 @@ export default function ShopScreen() {
         </View>
 
         <View style={{ gap: 4 }}>
-          <Text title="$7.99" size="14" color={Colors.light.background} />
-          <Text title="$5.89" size="14" color={Colors.light.background} />
+          <Text title="$0" size="14" color={Colors.light.background} />
+          <Text title="$0" size="14" color={Colors.light.background} />
         </View>
       </View>
 
@@ -134,7 +134,7 @@ export default function ShopScreen() {
       <View style={styles.footer}>
         <Text title="Grand Total" size="22" color={Colors.light.background} />
 
-        <Text title="$50.00" size="22" color={Colors.light.background} />
+        <Text title={`$${total()}`} size="22" color={Colors.light.background} />
       </View>
 
       <Button
