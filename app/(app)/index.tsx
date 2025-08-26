@@ -14,6 +14,7 @@ import { Text, Input, Card } from "@/components";
 import avatar from "../../assets/images/avatar.png";
 import { CardComponentProps } from "@/components/card";
 import { useCoffeStore } from "@/store";
+import { useState } from "react";
 
 const DATA = [
   {
@@ -62,7 +63,11 @@ const DATA = [
 ];
 
 export default function HomeScreen() {
-  const { fetch } = useCoffeStore();
+  const { fetch, filter, setFilter } = useCoffeStore();
+
+  const filteredItems = DATA.filter((item) =>
+    item.title.toLowerCase().includes(filter.toLowerCase())
+  );
 
   const renderItem = ({ id, title, image, value }: CardComponentProps) => {
     return (
@@ -102,15 +107,14 @@ export default function HomeScreen() {
         </Pressable>
       </TouchableOpacity>
 
-      <Input />
+      <Input value={filter} handleChange={setFilter} />
 
       <FlatList
-        data={DATA}
+        data={filteredItems}
         renderItem={({ item }) => renderItem(item)}
         keyExtractor={(item) => item.id}
         numColumns={2}
         contentContainerStyle={{
-          alignItems: "center",
           paddingTop: 24,
           paddingLeft: 16,
           paddingBottom: 80,

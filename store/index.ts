@@ -12,6 +12,8 @@ type DataStore = {
   fetch: (item: CoffeProps) => void;
   removeItem: (id: number) => void;
   total: () => number;
+  filter: string;
+  setFilter: (item: string) => void;
 };
 
 export const useCoffeStore = create<DataStore>((set, get) => ({
@@ -28,4 +30,6 @@ export const useCoffeStore = create<DataStore>((set, get) => ({
         .data.reduce((acc, item) => acc + item.value, 0)
         .toFixed(2)
     ),
+  filter: "",
+  setFilter: (text) => set({ filter: text }),
 }));

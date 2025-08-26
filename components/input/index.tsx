@@ -4,13 +4,15 @@ import Feather from "@expo/vector-icons/Feather";
 import { View } from "react-native";
 import { useState } from "react";
 
-export default function InputComponent() {
-  const [value, setValue] = useState("");
+interface InputComponentProps {
+  value: string;
+  handleChange: (item: string) => void;
+}
 
-  const handleChange = (item: string) => {
-    setValue(item);
-  };
-
+export default function InputComponent({
+  value,
+  handleChange,
+}: InputComponentProps) {
   return (
     <Container>
       <View>
