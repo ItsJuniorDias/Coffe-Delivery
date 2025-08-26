@@ -12,6 +12,7 @@ import {
 } from "react-native-gesture-handler";
 
 import { Container, ImageCustom, ViewButton, PressableCustom } from "./styles";
+import { useRouter } from "expo-router";
 
 export interface CardComponentProps {
   id: string;
@@ -28,8 +29,22 @@ export default function CardComponent({
   value,
   onPress,
 }: CardComponentProps) {
+  const router = useRouter();
+
   return (
-    <Container disabled key={id}>
+    <Container
+      onPress={() =>
+        router.push({
+          pathname: "/(profile)",
+          params: {
+            image,
+            title,
+            value,
+          },
+        })
+      }
+      key={id}
+    >
       <ImageCustom
         source={{
           uri: image,

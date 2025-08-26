@@ -7,6 +7,7 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
+import { StripeProvider } from "@stripe/stripe-react-native";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { Colors } from "@/constants/Colors";
@@ -25,16 +26,28 @@ export default function RootLayout() {
   }
 
   return (
-    <GestureHandlerRootView>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <StatusBar
-          style="light"
-          backgroundColor={Colors.light.backgroundTabBar}
-        />
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        </Stack>
-      </ThemeProvider>
-    </GestureHandlerRootView>
+    <StripeProvider
+      publishableKey="pk_test_51S0Q1uEh4zjPHEag1ccdx44CrTXJavCokiAfWEsmA76BF35IKjdM2BOvlo3W1AZCZRfb6qZEpbl125rdTuns5xB600FfLttySw"
+      merchantIdentifier="merchant.com.itsjuniordias1997.coffe-delivery"
+    >
+      <GestureHandlerRootView>
+        <ThemeProvider
+          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        >
+          <StatusBar
+            style="light"
+            backgroundColor={Colors.light.backgroundTabBar}
+          />
+          <Stack initialRouteName="(app)">
+            <Stack.Screen
+              name="(profile)/index"
+              options={{ headerShown: false }}
+            />
+
+            <Stack.Screen name="(app)" options={{ headerShown: false }} />
+          </Stack>
+        </ThemeProvider>
+      </GestureHandlerRootView>
+    </StripeProvider>
   );
 }

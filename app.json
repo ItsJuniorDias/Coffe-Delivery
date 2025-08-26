@@ -9,7 +9,11 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.itsjuniordias1997.coffe-delivery",
+      "applePay": {
+        "merchantIdentifier": "merchant.com.itsjuniordias1997.coffe-delivery"
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -32,6 +36,13 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.com.itsjuniordias1997.coffe-delivery",
+          "enableGooglePay": true
         }
       ]
     ],

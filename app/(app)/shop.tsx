@@ -5,11 +5,14 @@ import {
   ScrollView,
   StyleSheet,
   View,
+  Alert,
 } from "react-native";
 import { Colors } from "@/constants/Colors";
 import Constants from "expo-constants";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Image } from "expo-image";
+
+import { useStripe } from "@stripe/stripe-react-native";
 
 import { Text, CardShop, Divider, Button } from "@/components";
 
@@ -20,11 +23,13 @@ import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
   withSpring,
+  withTiming,
   runOnJS,
 } from "react-native-reanimated";
 import { MaterialIcons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCoffeStore } from "@/store";
+import { api } from "@/service/api";
 
 const { width } = Dimensions.get("window");
 const TRANSLATE_X_THRESHOLD = -width * 0.3;
@@ -47,13 +52,17 @@ function SwipeableItem({ item, onDelete }: SwipeableProps) {
 
   const translateX = useSharedValue(0);
 
+  const opacity = useSharedValue(1);
+
   const gestureHandler = useAnimatedGestureHandler({
     onActive: (event) => {
       translateX.value = Math.min(0, event.translationX);
     },
     onEnd: () => {
       if (translateX.value < TRANSLATE_X_THRESHOLD) {
-        runOnJS(onDelete)(item.id);
+        opacity.value = withTiming(0, { duration: 300 }, () => {
+          runOnJS(onDelete)(item.id);
+        });
       } else {
         translateX.value = withSpring(0);
       }
@@ -66,6 +75,10 @@ function SwipeableItem({ item, onDelete }: SwipeableProps) {
     };
   });
 
+  const animatedStyleFadeOut = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+  }));
+
   return (
     <>
       {/* Fundo vermelho com ícone de lixeira */}
@@ -74,7 +87,7 @@ function SwipeableItem({ item, onDelete }: SwipeableProps) {
       </View>
 
       <PanGestureHandler onGestureEvent={gestureHandler}>
-        <Animated.View style={[animatedStyle]}>
+        <Animated.View style={[animatedStyle, animatedStyleFadeOut]}>
           <CardShop {...item} />
         </Animated.View>
       </PanGestureHandler>
@@ -85,7 +98,37 @@ function SwipeableItem({ item, onDelete }: SwipeableProps) {
 export default function ShopScreen() {
   const { data, removeItem, total } = useCoffeStore();
 
-  console.log(data, "DATA");
+  const { initPaymentSheet, presentPaymentSheet, retrievePaymentIntent } =
+    useStripe();
+
+  async function openPaymentSheet() {
+    try {
+      const paymentIntent = await api.post("/create-payment-intent", {
+        amount: `${total()}`.replace(/\./g, ""),
+      });
+
+      const { error: initError } = await initPaymentSheet({
+        paymentIntentClientSecret: paymentIntent.data.clientSecret,
+        merchantDisplayName: "merchant.com.itsjuniordias1997.coffe-delivery",
+      });
+
+      if (initError) {
+        console.log("Erro ao inicializar Payment Sheet:", initError);
+        return;
+      }
+
+      // 2. Agora você pode apresentar a Payment Sheet
+      const { error: paymentError } = await presentPaymentSheet();
+
+      if (paymentError) {
+        console.log("Erro no pagamento:", paymentError);
+      } else {
+        console.log("Pagamento realizado com sucesso!");
+      }
+    } catch (err) {
+      console.log("Erro inesperado:", err);
+    }
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -138,7 +181,7 @@ export default function ShopScreen() {
       </View>
 
       <Button
-        onPress={() => {}}
+        onPress={() => openPaymentSheet()}
         title="PAY NOW"
         style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
       />

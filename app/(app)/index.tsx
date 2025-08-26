@@ -1,6 +1,12 @@
 import { Colors } from "@/constants/Colors";
 import { Image } from "expo-image";
-import { FlatList, Pressable, StyleSheet, View } from "react-native";
+import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Constants from "expo-constants";
 
 import { Text, Input, Card } from "@/components";
@@ -72,7 +78,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      <TouchableOpacity onPress={() => {}} style={styles.header}>
         <View>
           <Text
             title="déjà"
@@ -94,7 +100,7 @@ export default function HomeScreen() {
         >
           <Image source={avatar} style={styles.image} />
         </Pressable>
-      </View>
+      </TouchableOpacity>
 
       <Input />
 
