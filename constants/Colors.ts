@@ -20,6 +20,7 @@ export const Colors = {
     bakgroundButtonCard: "#453e46",
     iconFocused: "#EFE3C8",
     red: "#C94C4C",
+    badge: "#38232a",
   },
   dark: {
     text: "#ECEDEE",

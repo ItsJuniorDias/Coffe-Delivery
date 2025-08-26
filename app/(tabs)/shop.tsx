@@ -8,9 +8,10 @@ import {
 } from "react-native";
 import { Colors } from "@/constants/Colors";
 import Constants from "expo-constants";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import { Image } from "expo-image";
 
-import { Text, CardShop } from "@/components";
+import { Text, CardShop, Divider, Button } from "@/components";
 
 import { PanGestureHandler } from "react-native-gesture-handler";
 
@@ -22,7 +23,7 @@ import Animated, {
   runOnJS,
 } from "react-native-reanimated";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const { width } = Dimensions.get("window");
 const TRANSLATE_X_THRESHOLD = -width * 0.3;
@@ -124,6 +125,48 @@ export default function ShopScreen() {
         )}
         keyExtractor={(item) => item.id}
       />
+
+      <Divider />
+
+      <View style={styles.badge}>
+        <Text
+          title="Apply Coupon Code"
+          size="14"
+          color={Colors.light.iconFocused}
+        />
+
+        <AntDesign name="right" size={24} color={Colors.light.iconFocused} />
+      </View>
+
+      <View style={styles.contentText}>
+        <View style={{ gap: 4 }}>
+          <Text
+            title="Delivery Charges"
+            size="14"
+            color={Colors.light.background}
+          />
+          <Text title="Taxes" size="14" color={Colors.light.background} />
+        </View>
+
+        <View style={{ gap: 4 }}>
+          <Text title="$7.99" size="14" color={Colors.light.background} />
+          <Text title="$5.89" size="14" color={Colors.light.background} />
+        </View>
+      </View>
+
+      <Divider />
+
+      <View style={styles.footer}>
+        <Text title="Grand Total" size="22" color={Colors.light.background} />
+
+        <Text title="$50.00" size="22" color={Colors.light.background} />
+      </View>
+
+      <Button
+        onPress={() => {}}
+        title="PAY NOW"
+        style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+      />
     </ScrollView>
   );
 }
@@ -149,5 +192,28 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     alignItems: "center",
     justifyContent: "center",
+  },
+  badge: {
+    width: "100%",
+    height: 40,
+    backgroundColor: Colors.light.badge,
+    marginTop: 24,
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderRadius: 4,
+    paddingHorizontal: 24,
+    flexDirection: "row",
+  },
+  contentText: {
+    marginTop: 24,
+    gap: 4,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 24,
+  },
+  footer: {
+    marginTop: 24,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
