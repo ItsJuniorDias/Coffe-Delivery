@@ -36,7 +36,12 @@ export default function CardShopComponent({
         />
 
         <Content>
-          <Text title={title} color={Colors.light.background} size="14" />
+          <Text
+            numberOfLines={1}
+            title={title}
+            color={Colors.light.background}
+            size="14"
+          />
           <Text title={description} color={Colors.light.background} size="12" />
           <Text title={`$${value}`} color={Colors.light.background} size="16" />
         </Content>

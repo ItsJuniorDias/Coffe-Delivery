@@ -14,18 +14,22 @@ import {
 import { Container, ImageCustom, ViewButton, PressableCustom } from "./styles";
 
 export interface CardComponentProps {
+  id: string;
   image: string;
   title: string;
   value: string;
+  onPress: (item: {}) => void;
 }
 
 export default function CardComponent({
+  id,
   image,
   title,
   value,
+  onPress,
 }: CardComponentProps) {
   return (
-    <Container>
+    <Container disabled key={id}>
       <ImageCustom
         source={{
           uri: image,
@@ -35,9 +39,17 @@ export default function CardComponent({
       <Text title={title} size="14" color={Colors.light.background} />
 
       <ViewButton>
-        <Text title={value} size="16" color={Colors.light.background} />
+        <Text title={`$${value}`} size="16" color={Colors.light.background} />
 
         <PressableCustom
+          onPress={() =>
+            onPress({
+              id,
+              image,
+              title,
+              value,
+            })
+          }
           style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
         >
           <AntDesign name="plus" size={24} color="black" />

@@ -21,8 +21,8 @@ export const ImageCustom = styled(Image)`
 `;
 
 export const Content = styled.View`
+  width: 132px;
   padding-left: 16px;
-  gap: 8px;
 `;
 
 export const ButtonContent = styled.View`

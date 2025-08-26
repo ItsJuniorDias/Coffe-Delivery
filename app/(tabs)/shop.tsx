@@ -24,6 +24,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
+import { useUserStore } from "@/store";
 
 const { width } = Dimensions.get("window");
 const TRANSLATE_X_THRESHOLD = -width * 0.3;
@@ -42,16 +43,17 @@ type SwipeableProps = {
 };
 
 function SwipeableItem({ item, onDelete }: SwipeableProps) {
-  // cada item tem seu próprio sharedValue
+  console.log(item, "ITEM");
+
   const translateX = useSharedValue(0);
 
   const gestureHandler = useAnimatedGestureHandler({
     onActive: (event) => {
-      translateX.value = Math.min(0, event.translationX); // só permite arrastar pra esquerda
+      translateX.value = Math.min(0, event.translationX);
     },
     onEnd: () => {
       if (translateX.value < TRANSLATE_X_THRESHOLD) {
-        runOnJS(onDelete)(item.id); // remove do estado
+        runOnJS(onDelete)(item.id);
       } else {
         translateX.value = withSpring(0);
       }
@@ -81,36 +83,9 @@ function SwipeableItem({ item, onDelete }: SwipeableProps) {
 }
 
 export default function ShopScreen() {
-  const [data, setData] = useState([
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      image:
-        "https://images.unsplash.com/photo-1577968897411-6973c2e2452a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGNvZmZlJTIwZ3JlZW58ZW58MHx8MHx8fDA%3D",
-      title: "Cappuccino",
-      description: "Dalgona Macha",
-      value: 5.99,
-    },
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28b1",
-      image:
-        "https://images.unsplash.com/photo-1654200390170-91af88e67120?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNvZmZlJTIwZ3JlZW58ZW58MHx8MHx8fDA%3D",
-      title: "Cappuccino",
-      description: "Bursting Blueberry",
-      value: 8.99,
-    },
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28b2",
-      image:
-        "https://images.unsplash.com/photo-1534687941688-651ccaafbff8?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Q2FwcHVjY2lub3xlbnwwfHwwfHx8MA%3D%3D",
-      title: "Cappuccino",
-      description: "Cinnamon & Cocoa",
-      value: 0.99,
-    },
-  ]);
+  const { data, removeItem } = useUserStore();
 
-  const handleDelete = (id: string) => {
-    setData((prev) => prev.filter((item) => item.id !== id));
-  };
+  console.log(data, "DATA");
 
   return (
     <ScrollView style={styles.container}>
@@ -121,7 +96,7 @@ export default function ShopScreen() {
       <FlatList
         data={data}
         renderItem={({ item }) => (
-          <SwipeableItem item={item} onDelete={handleDelete} />
+          <SwipeableItem item={item} onDelete={removeItem} />
         )}
         keyExtractor={(item) => item.id}
       />
