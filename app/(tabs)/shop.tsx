@@ -141,12 +141,13 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   deleteBackground: {
-    ...StyleSheet.absoluteFillObject,
+    position: "absolute",
+    right: 0,
+    width: 55,
     height: 96,
-    backgroundColor: "red",
+    backgroundColor: Colors.light.red,
     borderRadius: 16,
-    alignItems: "flex-end",
+    alignItems: "center",
     justifyContent: "center",
-    paddingRight: 20,
   },
 });

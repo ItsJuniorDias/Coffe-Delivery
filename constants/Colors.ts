@@ -19,6 +19,7 @@ export const Colors = {
     backgroundCard: "#372d37",
     bakgroundButtonCard: "#453e46",
     iconFocused: "#EFE3C8",
+    red: "#C94C4C",
   },
   dark: {
     text: "#ECEDEE",
