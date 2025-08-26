@@ -2,6 +2,14 @@
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
+### Figma 
+
+https://www.figma.com/design/0rGeLr84p6CN14j0QeHjjg/Coffee-Delivery-App-Exploration--Community-?node-id=0-1&p=f&t=JMcX0whrSpChlIrX-0
+
+### Evidence
+
+https://github.com/user-attachments/assets/a8e1c6ce-f3ab-4456-9142-e135a3acb665
+
 ## Get started
 
 1. Install dependencies
