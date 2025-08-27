@@ -1,6 +1,8 @@
-const express = require("express");
+import express from "express";
 const app = express();
-const stripe = require("stripe")(process.env.API_SECRET);
+import Stripe from "stripe";
+
+const stripe = new Stripe(`${process.env.API_SECRET}`);
 
 app.use(express.json());
 
@@ -9,7 +11,7 @@ app.post("/create-payment-intent", async (req, res) => {
 
   try {
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: req.body.amount, // valor em centavos
+      amount: req.bod.amount, // valor em centavos
       currency: "brl",
       payment_method_types: ["card"],
     });
