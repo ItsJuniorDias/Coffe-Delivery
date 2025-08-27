@@ -48,6 +48,8 @@ type SwipeableProps = {
 };
 
 function SwipeableItem({ item, onDelete }: SwipeableProps) {
+  console.log(item, "ITEM");
+
   const translateX = useSharedValue(0);
 
   const opacity = useSharedValue(1);

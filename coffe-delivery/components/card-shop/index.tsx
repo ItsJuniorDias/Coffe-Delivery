@@ -12,20 +12,34 @@ import {
 } from "./styles";
 import { Colors } from "@/constants/Colors";
 import { View } from "react-native";
+import { useCoffeStore } from "@/store";
 
 interface CardShopComponentProsp {
+  id: string;
   image: string;
   title: string;
   description: string;
   value: number;
+  quantity: number;
 }
 
 export default function CardShopComponent({
+  id,
   image,
   title,
   description,
   value,
+  quantity,
 }: CardShopComponentProsp) {
+  console.log(
+    {
+      id,
+    },
+    "QUANTITY"
+  );
+
+  const { setQuantityPlus, setQuantityMinus } = useCoffeStore();
+
   return (
     <Container>
       <View style={{ flexDirection: "row" }}>
@@ -49,16 +63,16 @@ export default function CardShopComponent({
 
       <ButtonContent>
         <Button
-          onPress={() => {}}
+          onPress={() => setQuantityMinus(id)}
           style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
         >
           <AntDesign name="minus" size={24} color="black" />
         </Button>
 
-        <Text title="1" color={Colors.light.background} size="20" />
+        <Text title={`${quantity}`} color={Colors.light.background} size="20" />
 
         <Button
-          onPress={() => {}}
+          onPress={() => setQuantityPlus(id)}
           style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
         >
           <Entypo name="plus" size={24} color="black" />

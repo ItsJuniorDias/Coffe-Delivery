@@ -21,7 +21,7 @@ import { useState } from "react";
 import { useCoffeStore } from "@/store";
 
 export default function ProfileScreen() {
-  const { id, image, title, value } = useLocalSearchParams();
+  const { id, image, title, value, quantity } = useLocalSearchParams();
 
   const { fetch } = useCoffeStore();
 
@@ -165,6 +165,7 @@ export default function ProfileScreen() {
               title: title,
               value: Number(value),
               image: image,
+              quantity: quantity,
             })
           }
           title="BUY NOW"

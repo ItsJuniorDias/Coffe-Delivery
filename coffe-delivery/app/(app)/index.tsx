@@ -24,6 +24,7 @@ const DATA = [
     image:
       "https://plus.unsplash.com/premium_photo-1674327105074-46dd8319164b?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29mZmV8ZW58MHx8MHx8fDA%3D",
     value: 5.99,
+    quantity: 1,
   },
   {
     id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
@@ -31,6 +32,7 @@ const DATA = [
     image:
       "https://images.unsplash.com/photo-1630040995437-80b01c5dd52d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNvZmZlfGVufDB8fDB8fHww",
     value: 9.89,
+    quantity: 1,
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d72",
@@ -38,6 +40,7 @@ const DATA = [
     image:
       "https://plus.unsplash.com/premium_photo-1673545518947-ddf3240090b1?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGNvZmZlfGVufDB8fDB8fHww",
     value: 10.0,
+    quantity: 1,
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d73",
@@ -45,6 +48,7 @@ const DATA = [
     image:
       "https://images.unsplash.com/photo-1497636577773-f1231844b336?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y29mZmV8ZW58MHx8MHx8fDA%3D",
     value: 7.99,
+    quantity: 1,
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d74",
@@ -52,6 +56,7 @@ const DATA = [
     image:
       "https://images.unsplash.com/photo-1588483977150-9c2127ab7bcc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNvZmZlfGVufDB8fDB8fHww",
     value: 6.99,
+    quantity: 1,
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d71",
@@ -59,6 +64,7 @@ const DATA = [
     image:
       "https://images.unsplash.com/photo-1630040995437-80b01c5dd52d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNvZmZlfGVufDB8fDB8fHww",
     value: 9.99,
+    quantity: 1,
   },
 ];
 
@@ -69,13 +75,20 @@ export default function HomeScreen() {
     item.title.toLowerCase().includes(filter.toLowerCase())
   );
 
-  const renderItem = ({ id, title, image, value }: CardComponentProps) => {
+  const renderItem = ({
+    id,
+    title,
+    image,
+    value,
+    quantity,
+  }: CardComponentProps) => {
     return (
       <Card
         id={id}
         image={image}
         title={title}
         value={value}
+        quantity={quantity}
         onPress={(item) => fetch(item)}
       />
     );

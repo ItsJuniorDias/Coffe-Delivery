@@ -19,6 +19,7 @@ export interface CardComponentProps {
   image: string;
   title: string;
   value: string;
+  quantity: number;
   onPress: (item: {}) => void;
 }
 
@@ -27,6 +28,7 @@ export default function CardComponent({
   image,
   title,
   value,
+  quantity,
   onPress,
 }: CardComponentProps) {
   const router = useRouter();
@@ -41,6 +43,7 @@ export default function CardComponent({
             image,
             title,
             value,
+            quantity,
           },
         })
       }
@@ -64,6 +67,7 @@ export default function CardComponent({
               image,
               title,
               value,
+              quantity,
             })
           }
           style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
