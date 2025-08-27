@@ -96,8 +96,6 @@ function SwipeableItem({ item, onDelete }: SwipeableProps) {
 export default function ShopScreen() {
   const { data, removeItem, total } = useCoffeStore();
 
-  console.log(data, "DATA");
-
   const { initPaymentSheet, presentPaymentSheet, retrievePaymentIntent } =
     useStripe();
 
@@ -106,6 +104,8 @@ export default function ShopScreen() {
       const paymentIntent = await api.post("/create-payment-intent", {
         amount: `${total()}`.replace(/\./g, ""),
       });
+
+      console.log(paymentIntent.data, "DATA");
 
       const { error: initError } = await initPaymentSheet({
         paymentIntentClientSecret: paymentIntent.data.clientSecret,
