@@ -48,8 +48,6 @@ type SwipeableProps = {
 };
 
 function SwipeableItem({ item, onDelete }: SwipeableProps) {
-  console.log(item, "ITEM");
-
   const translateX = useSharedValue(0);
 
   const opacity = useSharedValue(1);
@@ -98,6 +96,8 @@ function SwipeableItem({ item, onDelete }: SwipeableProps) {
 export default function ShopScreen() {
   const { data, removeItem, total } = useCoffeStore();
 
+  console.log(data, "DATA");
+
   const { initPaymentSheet, presentPaymentSheet, retrievePaymentIntent } =
     useStripe();
 
@@ -131,7 +131,10 @@ export default function ShopScreen() {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      contentContainerStyle={{ paddingBottom: 96 }}
+      style={styles.container}
+    >
       <View style={styles.header}>
         <Text title="Cart" color={Colors.light.background} size="24" />
       </View>

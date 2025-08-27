@@ -18,9 +18,12 @@ import {
 } from "./styles";
 import { TouchableOpacity, View } from "react-native";
 import { useState } from "react";
+import { useCoffeStore } from "@/store";
 
 export default function ProfileScreen() {
-  const { image, title, value } = useLocalSearchParams();
+  const { id, image, title, value } = useLocalSearchParams();
+
+  const { fetch } = useCoffeStore();
 
   const router = useRouter();
 
@@ -156,6 +159,14 @@ export default function ProfileScreen() {
         </View>
 
         <Button
+          onPress={() =>
+            fetch({
+              id: id,
+              title: title,
+              value: Number(value),
+              image: image,
+            })
+          }
           title="BUY NOW"
           style={({ pressed }) => [
             { opacity: pressed ? 0.7 : 1, width: "80%" },

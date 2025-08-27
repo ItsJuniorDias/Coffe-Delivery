@@ -37,6 +37,7 @@ export default function CardComponent({
         router.push({
           pathname: "/(profile)",
           params: {
+            id,
             image,
             title,
             value,
